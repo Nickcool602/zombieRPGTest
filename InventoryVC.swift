@@ -19,11 +19,6 @@ class InventoryVC: UIViewController {
     var pantsInvRecieved : [String] = []
     var pantsSelection = 0
     
-    @IBOutlet weak var hatsEquippedLabel: UILabel!
-    var hatsEquippedRecieved = ""
-    var hatsInvRecieved : [String] = []
-    var hatsSelection = 0
-    
     @IBOutlet weak var shoesEquippedLabel: UILabel!
     var shoesEquippedRecieved = ""
     var shoesInvRecieved : [String] = []
@@ -33,6 +28,16 @@ class InventoryVC: UIViewController {
     var socksEquippedRecieved = ""
     var socksInvRecieved : [String] = []
     var socksSelection = 0
+    
+    @IBOutlet weak var hatsEquippedLabel: UILabel!
+    var hatsEquippedRecieved = ""
+    var hatsInvRecieved : [String] = []
+    var hatsSelection = 0
+    
+    @IBOutlet weak var weaponsEquippedLabel: UILabel!
+    var weaponsEquippedRecieved = ""
+    var weaponsInvRecieved : [String] = []
+    var weaponsSelection = 0
     
     func invUpdate() {
         
@@ -101,6 +106,26 @@ class InventoryVC: UIViewController {
             socksEquippedLabel.text = "None"
         }
         
+        if weaponsInvRecieved.count > 0 {
+            if weaponsSelection > weaponsInvRecieved.count - 1 {
+                        weaponsSelection = weaponsInvRecieved.count - 1
+                    }
+                    else if weaponsSelection <= 0 {
+                        weaponsSelection = 0
+                    }
+                    weaponsEquippedLabel.text = weaponsInvRecieved[weaponsSelection]
+        }
+        else {
+            weaponsEquippedLabel.text = "None"
+        }
+        
+        print(topsEquippedRecieved)
+        print(pantsEquippedRecieved)
+        print(shoesEquippedRecieved)
+        print(socksEquippedRecieved)
+        print(hatsEquippedRecieved)
+        print(weaponsEquippedRecieved)
+        
     }
     
     override func viewDidLoad() {
@@ -110,11 +135,6 @@ class InventoryVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         invUpdate()
-        print(topsEquippedRecieved)
-        print(pantsEquippedRecieved)
-        print(shoesEquippedRecieved)
-        print(socksEquippedRecieved)
-        print(hatsEquippedRecieved)
     }
     
     @IBAction func topsLeft(_ sender: UIButton) {
@@ -167,34 +187,56 @@ class InventoryVC: UIViewController {
         invUpdate()
     }
     
+    @IBAction func weaponsLeft(_ sender: UIButton) {
+        weaponsSelection = weaponsSelection - 1
+        invUpdate()
+    }
+    
+    @IBAction func weaponsRight(_ sender: UIButton) {
+        weaponsSelection = weaponsSelection + 1
+        invUpdate()
+    }
+    
     @IBAction func topsEquip(_ sender: UIButton) {
         if topsInvRecieved.count > 0 {
             topsEquippedRecieved = topsInvRecieved[topsSelection]
         }
+        invUpdate()
     }
     
     @IBAction func pantsEquip(_ sender: UIButton) {
         if pantsInvRecieved.count > 0 {
             pantsEquippedRecieved = pantsInvRecieved[pantsSelection]
         }
+        invUpdate()
     }
     
     @IBAction func shoesEquip(_ sender: UIButton) {
-        if pantsInvRecieved.count > 0 {
-            pantsEquippedRecieved = pantsInvRecieved[pantsSelection]
+        if shoesInvRecieved.count > 0 {
+            shoesEquippedRecieved = shoesInvRecieved[shoesSelection]
         }
+        invUpdate()
     }
     
     @IBAction func socksEquip(_ sender: UIButton) {
         if socksInvRecieved.count > 0 {
             socksEquippedRecieved = socksInvRecieved[socksSelection]
         }
+        invUpdate()
     }
     
     @IBAction func hatsEquip(_ sender: UIButton) {
         if hatsInvRecieved.count > 0 {
             hatsEquippedRecieved = hatsInvRecieved[hatsSelection]
         }
+        invUpdate()
+    }
+    
+    @IBAction func weaponsEquip(_ sender: UIButton) {
+        if weaponsInvRecieved.count > 0 {
+            weaponsEquippedRecieved = weaponsInvRecieved[weaponsSelection]
+        }
+        invUpdate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -203,12 +245,14 @@ class InventoryVC: UIViewController {
         let shoesEquippedSender2 = segue.destination as! ViewController
         let socksEquippedSender2 = segue.destination as! ViewController
         let hatsEquippedSender2 = segue.destination as! ViewController
+        let weaponsEquippedSender2 = segue.destination as! ViewController
         
         topsEquippedSender2.topsEquipped = topsEquippedRecieved
         pantsEquippedSender2.pantsEquipped = pantsEquippedRecieved
         shoesEquippedSender2.shoesEquipped = shoesEquippedRecieved
         socksEquippedSender2.socksEquipped = socksEquippedRecieved
         hatsEquippedSender2.hatsEquipped = hatsEquippedRecieved
+        weaponsEquippedSender2.weaponEquipped = weaponsEquippedRecieved
     }
 
 }

@@ -22,26 +22,40 @@ class ViewController: UIViewController {
     var maxSpeed = 10
     
     var topsEquipped = "T-Shirt"
-    var topsInv : [String] = []
+    var topsInv = ["T-Shirt","Long Sleeves"]
     
     var pantsEquipped = "Jeans"
-    var pantsInv : [String] = []
+    var pantsInv = ["Jeans"]
     
     var shoesEquipped = "Sneakers"
-    var shoesInv : [String] = []
+    var shoesInv = ["Sneakers","Work Shoes"]
     
     var socksEquipped = "Basic Socks"
-    var socksInv : [String] = []
+    var socksInv = ["Basic Socks","Long Socks"]
     
     var hatsEquipped = "None"
     var hatsInv : [String] = []
-    
     
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var XPLabel: UILabel!
     @IBOutlet weak var HPLabel: UILabel!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        print(topsEquipped)
+        print(pantsEquipped)
+        print(shoesEquipped)
+        print(socksEquipped)
+        print(hatsEquipped)
+    }
+    
     func update() {
+        
+        print(topsEquipped)
+        print(pantsEquipped)
+        print(shoesEquipped)
+        print(socksEquipped)
+        print(hatsEquipped)
         
         //Leveling
         if XP >= level * 10 {
